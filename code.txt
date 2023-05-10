@@ -3,8 +3,10 @@ b="string ce faci"
 start{
 ((a))
 ((b))
-ce faci?
+ce faci?.>\<
+bos
 (other)
+(! aceasta se va schimba? )
 }
 other{
     end

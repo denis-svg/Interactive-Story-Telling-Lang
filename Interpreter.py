@@ -89,7 +89,17 @@ class Interpreter:
                     else:
                         raise NotDeclaredVariable(var_name, content.getChild(2).start, content.getText())
                 if isinstance(content, ExprParser.TextContext):
-                    text += ' ' + content.getText()
+                    if content.getText() == '.newLine':
+                        text += "\n"
+                    else:
+                        if text[-1] != '\n':
+                            text += ' ' + content.getText()
+                        else:
+                            text += content.getText()
+                if isinstance(content, ExprParser.NpcContext):
+                    cont = content.getChild(2)
+                    print(cont, type(cont), cont.getText())
+
             index_child += 1
             knot_content = start_knot.getChild(index_child)
         print(text)

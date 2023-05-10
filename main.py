@@ -5,8 +5,25 @@ from ExprParser import ExprParser
 from Interpreter import Interpreter
 from errors import MyErrorParserListener, MyErrorLexerListener
 
+def format_code(file_name):
+    f = open(file_name, 'r')
+    out = ""
+    mode = False
+    for line in f.readlines():
+        if mode:
+            out += ".newLine " + line
+        else:
+            out += line
+        if "{" in line:
+            mode = True
+        if '}' in line:
+            mode = False
+    f.close()
+
+    return out
+
 def main(argv):
-    input_stream = FileStream(argv[1])
+    input_stream = InputStream(format_code(argv[1]))
     
     lexer = ExprLexer(input_stream)
     lexer.removeErrorListeners()
