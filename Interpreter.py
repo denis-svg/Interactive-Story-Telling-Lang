@@ -31,8 +31,6 @@ class Interpreter:
                         # Increment string token
                         str_index += 1
                         value_token = value_node.getChild(str_index)
-                    
-                    value = value.strip()
                 else:
                     raise VarValueError(value, value_node.start, root.getText())
                 self.vars[var_name] = {"value": value, "type": typ}
@@ -70,7 +68,7 @@ class Interpreter:
             index += 1
             root = self.tree.getChild(index)
         return None
-    
+
     def execute(self):
         self.getVars()
         # starting knot is considered knot number 0
@@ -97,11 +95,63 @@ class Interpreter:
                         else:
                             text += content.getText()
                 if isinstance(content, ExprParser.NpcContext):
-                    cont = content.getChild(2)
-                    print(cont, type(cont), cont.getText())
+                    i = 2
+                    cont = content.getChild(i)
+                    while isinstance(cont, ExprParser.TextContext):
+                        if cont.getText() == '.newLine':
+                            text += "\n"
+                        else:
+                            if text[-1] != '\n':
+                                text += ' ' + cont.getText()
+                            else:
+                                text += cont.getText()
+                        i += 1
+                        cont = content.getChild(i)
+                if isinstance(content, ExprParser.Var_opContext):
+                    self.expressionContext(content)
 
             index_child += 1
             knot_content = start_knot.getChild(index_child)
         print(text)
         print(self.vars)
+    
+    def expressionContext(self, expr):
+        var_name = expr.getChild(1).getText()
+        if var_name not in self.vars:
+            raise NotDeclaredVariable(var_name, expr.getChild(1).start, expr.getText())
+        print(self.calculateExpr(expr.getChild(3)))
+
+
+
+    def calculateExpr(self, expr):
+        if isinstance(expr.getChild(0), ExprParser.StrContext):
+            return expr.getText()[1:-1]
+        if expr.getChild(0).getText() == '(':
+            return self.calculateExpr(expr.getChild(1))
+        if isinstance(expr.getChild(0), ExprParser.IntContext):
+            return int(expr.getText())
+        if isinstance(expr.getChild(0), ExprParser.Var_nameContext):
+            var_name = expr.getText()
+            if var_name not in self.vars:
+                raise NotDeclaredVariable(var_name, expr.start)
+            if self.vars[var_name]['type'] == 'int':
+                return int(self.vars[var_name]['value'])
+            else:
+                return self.vars[var_name]['value']
         
+        left_sum = self.calculateExpr(expr.getChild(0))
+        right_sum = self.calculateExpr(expr.getChild(2))
+        if not isinstance(left_sum, type(right_sum)):
+            raise CannotPerformMixOperations(expr.start)
+
+        if expr.getChild(1).getText() == "+":
+            return left_sum + right_sum
+        if isinstance(left_sum, int) and isinstance(right_sum, int):
+            if expr.getChild(1).getText() == "-":
+                return left_sum - right_sum
+            if expr.getChild(1).getText() == "*":
+                return left_sum * right_sum
+            if expr.getChild(1).getText() == "/":
+                return left_sum // right_sum
+        else:
+            raise NotValidOperationOnString(expr.getChild(1).getText(), expr.start)

@@ -10,21 +10,21 @@ def format_code(file_name):
     out = ""
     mode = False
     for line in f.readlines():
-        if mode:
-            out += ".newLine " + line
-        else:
-            out += line
         if "{" in line:
             mode = True
         if '}' in line:
             mode = False
+        if mode:
+            out += line[0:-1] + " .newLine" + '\n'
+        else:
+            out += line
     f.close()
-
+    print(out)
     return out
 
 def main(argv):
     input_stream = InputStream(format_code(argv[1]))
-    
+
     lexer = ExprLexer(input_stream)
     lexer.removeErrorListeners()
     lexer.addErrorListener(MyErrorLexerListener())

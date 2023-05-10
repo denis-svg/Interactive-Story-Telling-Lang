@@ -1,12 +1,15 @@
 a=414
 b="string ce faci"
+o="aici"
 start{
 ((a))
 ((b))
 ce faci?.>\<
 bos
 (other)
-(! aceasta se va schimba? )
+(! aceasta se va schimba?
+spre bine sau pre rau )
+[b=b + "sal"]
 }
 other{
     end
