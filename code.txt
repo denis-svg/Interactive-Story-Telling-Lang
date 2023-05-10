@@ -1,4 +1,11 @@
-a=4
+a=414
+b="string ce faci"
 start{
-ce faci
+((a))
+((b))
+ce faci?
+(other)
+}
+other{
+    end
 }
