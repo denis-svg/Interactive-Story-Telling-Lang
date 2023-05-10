@@ -161,15 +161,6 @@ class ExprListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by ExprParser#option_text.
-    def enterOption_text(self, ctx:ExprParser.Option_textContext):
-        pass
-
-    # Exit a parse tree produced by ExprParser#option_text.
-    def exitOption_text(self, ctx:ExprParser.Option_textContext):
-        pass
-
-
     # Enter a parse tree produced by ExprParser#knot_name.
     def enterKnot_name(self, ctx:ExprParser.Knot_nameContext):
         pass

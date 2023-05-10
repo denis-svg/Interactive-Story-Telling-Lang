@@ -39,10 +39,9 @@ expr:   expr ('*'|'/') expr
 
 goto : '(' knot_name ')' ;
 print : '(''(' var_name ')'')';
-npc: '(''!' option_text ')';
+npc: '(''!' (text)+ ')';
 choice: '(' '(' pair*  ')'')';
-pair:'!'option_text goto;
-option_text: (ID|INT)*;
+pair:'!'(text)+ goto;
 knot_name: ID;
 var_name:ID|INT;
 text: ID|INT;
