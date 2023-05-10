@@ -15,9 +15,19 @@ content: text
 	| npc
 	| choice
 	| var_op
+    | if
 	;
 
 var_op : '[' var_name '=' expr ']';
+if : '(' '(' '?' logic_expr goto ')'')';
+
+logic_expr: logic_expr ('&''&'|'|''|') logic_expr
+           | '(' logic_expr ')'
+           | bool_expr
+            ;
+bool_expr: bool_expr ('>'|'<'|'!''='|'=''='|'>''='|'<''=') bool_expr
+           | expr
+           ;
 
 expr:   expr ('*'|'/') expr
     |   expr ('+'|'-') expr
@@ -26,7 +36,6 @@ expr:   expr ('*'|'/') expr
     |   str
     | var_name
     ;
-
 
 goto : '(' knot_name ')' ;
 print : '(''(' var_name ')'')';
@@ -53,6 +62,6 @@ SUB: '-';
 ADD: '+';
 
 INT : [0-9]+ ;
-ID: [a-zA-Z_][a-zA-Z_0-9]*; 
+ID: [a-zA-Z_0-9?.\\,;%<>!]+; 
 WS: [ \t\n\r\f]+ -> skip ;
 

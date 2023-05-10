@@ -80,6 +80,33 @@ class ExprListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ExprParser#if.
+    def enterIf(self, ctx:ExprParser.IfContext):
+        pass
+
+    # Exit a parse tree produced by ExprParser#if.
+    def exitIf(self, ctx:ExprParser.IfContext):
+        pass
+
+
+    # Enter a parse tree produced by ExprParser#logic_expr.
+    def enterLogic_expr(self, ctx:ExprParser.Logic_exprContext):
+        pass
+
+    # Exit a parse tree produced by ExprParser#logic_expr.
+    def exitLogic_expr(self, ctx:ExprParser.Logic_exprContext):
+        pass
+
+
+    # Enter a parse tree produced by ExprParser#bool_expr.
+    def enterBool_expr(self, ctx:ExprParser.Bool_exprContext):
+        pass
+
+    # Exit a parse tree produced by ExprParser#bool_expr.
+    def exitBool_expr(self, ctx:ExprParser.Bool_exprContext):
+        pass
+
+
     # Enter a parse tree produced by ExprParser#expr.
     def enterExpr(self, ctx:ExprParser.ExprContext):
         pass
