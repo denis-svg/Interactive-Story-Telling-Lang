@@ -9,7 +9,7 @@ bos
 (other)
 (! aceasta se va schimba?
 spre bine sau pre rau )
-[b=b + "sal"]
+[a=a +100*(4-4 -2)]
 }
 other{
     end

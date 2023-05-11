@@ -81,45 +81,65 @@ class Interpreter:
             if isinstance(knot_content, ExprParser.ContentContext):
                 content = knot_content.getChild(0)
                 if isinstance(content, ExprParser.PrintContext):
-                    var_name = content.getChild(2).getText()
-                    if var_name in self.vars:
-                        text += self.vars[var_name]['value']
-                    else:
-                        raise NotDeclaredVariable(var_name, content.getChild(2).start, content.getText())
+                    text = self.printContext(content, text)
                 if isinstance(content, ExprParser.TextContext):
-                    if content.getText() == '.newLine':
-                        text += "\n"
-                    else:
-                        if text[-1] != '\n':
-                            text += ' ' + content.getText()
-                        else:
-                            text += content.getText()
+                    text = self.textContext(content, text)
                 if isinstance(content, ExprParser.NpcContext):
-                    i = 2
-                    cont = content.getChild(i)
-                    while isinstance(cont, ExprParser.TextContext):
-                        if cont.getText() == '.newLine':
-                            text += "\n"
-                        else:
-                            if text[-1] != '\n':
-                                text += ' ' + cont.getText()
-                            else:
-                                text += cont.getText()
-                        i += 1
-                        cont = content.getChild(i)
+                    text = self.npcContext(content, text)
                 if isinstance(content, ExprParser.Var_opContext):
                     self.expressionContext(content)
+                if isinstance(content, ExprParser.GotoContext):
+                    knot_name = content.getChild(1).getText()
+                    print(knot_content)
 
             index_child += 1
             knot_content = start_knot.getChild(index_child)
         print(text)
         print(self.vars)
+
+    def printContext(self, content, text):
+        var_name = content.getChild(2).getText()
+        if var_name in self.vars:
+            text += self.vars[var_name]['value']
+        else:
+            raise NotDeclaredVariable(var_name, content.getChild(2).start, content.getText())
+        return text
+
+    def textContext(self, content, text):
+        if content.getText() == '.newLine':
+            text += "\n"
+        else:
+            if text[-1] != '\n':
+                text += ' ' + content.getText()
+            else:
+                text += content.getText()
+        return text
+
+    def npcContext(self, content, text):
+        i = 2
+        cont = content.getChild(i)
+        while isinstance(cont, ExprParser.TextContext):
+            if cont.getText() == '.newLine':
+                text += "\n"
+            else:
+                if text[-1] != '\n':
+                    text += ' ' + cont.getText()
+                else:
+                    text += cont.getText()
+            i += 1
+            cont = content.getChild(i)
+        return text
     
     def expressionContext(self, expr):
         var_name = expr.getChild(1).getText()
         if var_name not in self.vars:
             raise NotDeclaredVariable(var_name, expr.getChild(1).start, expr.getText())
-        print(self.calculateExpr(expr.getChild(3)))
+        expr_val = self.calculateExpr(expr.getChild(3))
+        if isinstance(expr_val, str) and self.vars[var_name]['type'] == "int":
+            raise CannotPerformMixOperations(expr.start)
+        if isinstance(expr_val, int) and self.vars[var_name]['type'] == "string":
+            raise CannotPerformMixOperations(expr.start)
+        self.vars[var_name]['value'] = expr_val
 
 
 
