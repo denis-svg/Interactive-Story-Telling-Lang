@@ -69,13 +69,9 @@ class Interpreter:
             root = self.tree.getChild(index)
         return None
 
-    def execute(self):
-        self.getVars()
-        # starting knot is considered knot number 0
-        start_knot = self.getKnotByIndex(0)
-
+    def checkKnot(self, knot):
         index_child = 0
-        knot_content = start_knot.getChild(index_child)
+        knot_content = knot.getChild(index_child)
         text = ""
         while knot_content is not None:
             if isinstance(knot_content, ExprParser.ContentContext):
@@ -90,12 +86,50 @@ class Interpreter:
                     self.expressionContext(content)
                 if isinstance(content, ExprParser.GotoContext):
                     knot_name = content.getChild(1).getText()
-                    print(knot_content)
+                    print(text)
+                    text = ""
+                    knot_node = self.getKnotByName(knot_name)
+                    self.checkKnot(knot_node)
+                if isinstance(content, ExprParser.ChoiceContext):
+                    print(text)
+                    text = ""
+                    pairs = self.choiceContext(content)
+                    for pair in pairs:
+                        print(pair[1])
+                    choice = int(input("$"))
+                    knot_node = self.getKnotByName(pairs[choice][0])
+                    self.checkKnot(knot_node)
+
 
             index_child += 1
-            knot_content = start_knot.getChild(index_child)
+            knot_content = knot.getChild(index_child)
         print(text)
-        print(self.vars)
+
+    def execute(self):
+        self.getVars()
+        # starting knot is considered knot number 0
+        start_knot = self.getKnotByIndex(0)
+
+        self.checkKnot(start_knot)
+
+    def choiceContext(self, content):
+        i = 2
+        pair = content.getChild(i)
+        pairs_content = []
+        while isinstance(pair, ExprParser.PairContext):
+            j = 1
+            option = pair.getChild(j)
+            text = ""
+            while isinstance(option, ExprParser.TextContext):
+                text = self.textContext(option, text)
+                j += 1
+                option = pair.getChild(j)
+            knot_name = pair.getChild(j).getChild(1).getText()
+            pairs_content.append((knot_name, text))
+            i += 1
+            pair = content.getChild(i)
+
+        return pairs_content
 
     def printContext(self, content, text):
         var_name = content.getChild(2).getText()
@@ -109,7 +143,9 @@ class Interpreter:
         if content.getText() == '.newLine':
             text += "\n"
         else:
-            if text[-1] != '\n':
+            if not text:
+                text += content.getText()
+            elif text[-1] != '\n':
                 text += ' ' + content.getText()
             else:
                 text += content.getText()
@@ -139,7 +175,7 @@ class Interpreter:
             raise CannotPerformMixOperations(expr.start)
         if isinstance(expr_val, int) and self.vars[var_name]['type'] == "string":
             raise CannotPerformMixOperations(expr.start)
-        self.vars[var_name]['value'] = expr_val
+        self.vars[var_name]['value'] = str(expr_val)
 
 
 

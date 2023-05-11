@@ -9,17 +9,26 @@ def format_code(file_name):
     f = open(file_name, 'r')
     out = ""
     mode = False
+    choise = False
     for line in f.readlines():
         if "{" in line:
             mode = True
+            out += line[0:-1] + '\n'
+            continue
         if '}' in line:
             mode = False
-        if mode:
+        tokens = line.split()
+        for token in tokens:
+            if "((!" in token:
+                choise = True
+            if choise and "))" in token:
+                choise = False
+        
+        if mode and not choise:
             out += line[0:-1] + " .newLine" + '\n'
         else:
             out += line
     f.close()
-    print(out)
     return out
 
 def main(argv):
@@ -36,9 +45,11 @@ def main(argv):
     tree = parser.program()
 
     tj = Interpreter(tree)
-    print(tree.toStringTree())
-    print(tree.toStringTree(recog=parser))
-    print()
+    
+    #print(tree.toStringTree())
+    #print(tree.toStringTree(recog=parser))
+    #print()
+
     tj.execute()
 
  

@@ -2,15 +2,16 @@ a=414
 b="string ce faci"
 o="aici"
 start{
-((a))
-((b))
-ce faci?.>\<
-bos
-(other)
-(! aceasta se va schimba?
-spre bine sau pre rau )
-[a=a +100*(4-4 -2)]
+
+A interesting story
+what will he do
+((! die (oh)
+! not die (other)))
+
 }
 other{
-    end
+    you won
+}
+oh{
+    oh thats bad ((a))
 }
