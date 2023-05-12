@@ -1,0 +1,127 @@
+% \addcontentsline{toc}{chapter}{Problem Description}
+\chapter{Problem Description and Problem Analysis}
+
+\section{Implementation plan}
+To have a better view on our Implementation plan let's define for the beggining the domain.
+The domain of interactive storytelling encompasses a wide range of creative industries, including gaming, film, literature, and education. In recent years, there has been a growing demand for more engaging and immersive forms of storytelling, and interactive storytelling has emerged as a popular solution to this demand. Interactive storytelling allows readers to participate in the story and influence its outcome, providing a more dynamic and personalized experience.
+
+
+Moreover, a DSL for interactive storytelling could also facilitate collaboration and knowledge sharing within the domain. Domain experts can share best practices, templates, and tools that could help other creators to design and produce high-quality interactive stories, accelerating the development of the field. A DSL can also provide a standard language and structure for interactive stories, making them easier to share and disseminate across different platforms and devices.
+
+In addition to the benefits mentioned earlier, a DSL for interactive storytelling could also enable domain experts to create more sophisticated and complex narratives. Currently, most interactive stories are limited in their complexity due to the technical skills required to program them. A DSL for interactive storytelling could provide an accessible platform for creators to design and produce stories with more intricate plot lines, character interactions, and decision trees.
+
+Another benefit of a DSL for interactive storytelling is that it could help bridge the gap between the creative and technical aspects of interactive storytelling. Often, domain experts are required to collaborate with technical experts to develop interactive stories, which can be a time-consuming and challenging process. A DSL for interactive storytelling that is designed to be user-friendly and accessible to non-technical experts could enable domain experts to take a more hands-on role in the development process, reducing the need for technical support.
+Furthermore, a DSL for interactive storytelling could help streamline the production process for interactive stories. Currently, creators often have to rely on different software tools and platforms to create and publish their interactive stories, which can be a cumbersome and inefficient process. A DSL for interactive storytelling that offers a complete set of tools and functionalities could simplify the production process and reduce the time and effort required to produce high-quality interactive stories.
+
+The problem being addressed is the creation of a DSL that provides a more intuitive and concise way to create interactive stories. While there are numerous programming languages available for developing games and simulations, these languages don’t always make it simple to create interactive stories with different pathways and multiple outcomes. There were implemented several tools for operating with narrative text, for example Inky editor [2].	
+These types of languages are used by people who like to engage in action completely, so the aim is to please different groups of people, including: young adults, gamers and virtual reality enthusiasts. It should allow users to easily create branching story paths, define character actions, dialogue, and create different outcomes based on user input. This language should also be easy to learn, so that even people who have no experience with programming can use it to create compelling interactive stories.
+
+
+Overall, a DSL for interactive storytelling has the potential to revolutionize the way we create and consume stories, making them more engaging, immersive, and accessible to a wider audience. By providing a standardized language and structure for interactive stories, a DSL can also help to establish interactive storytelling as a recognized and respected art form, opening up new opportunities for domain experts in a rapidly growing field.
+
+In summary, the development of a DSL for interactive storytelling can benefit domain experts by simplifying the process of designing and producing interactive stories, promoting collaboration and knowledge sharing, and standardizing the language and structure of interactive stories.
+
+\textbf{What is the basic computation that the DSL performs (i.e., what is the computational model)?}
+
+The imperative model would be used to define the sequence of events that occur in the story, and to specify the conditions that must be met for certain events to take place. This would include specifying the order in which story segments are displayed or activated, as well as specifying the options and choices available to the reader at various points in the story.
+The declarative model would be used to define the characters, settings, and objects in the story, as well as the relationships and interactions between them. This would include specifying the various attributes and properties of characters and objects, such as their personalities, abilities, and status, as well as the constraints and requirements for different story paths and endings.
+
+The language might also incorporate elements of a functional model, as it may need to process and manipulate data (such as the reader's choices or the state of the story) to determine the next steps in the narrative.
+
+\textbf {What are the basic data structures in your DSL? How does a the user create and manipulate data?}
+
+The basic data structures are likely to include objects, variables, and collections. These data structures are used to represent characters, settings, objects, and events in the story, as well as to store and manipulate data throughout the narrative.
+
+Objects: Objects are the fundamental building blocks of your DSL's data structures. In Inky, objects are used to represent characters, settings, and objects in the story, as well as to define their attributes and properties. The user can create and manipulate objects using simple and intuitive syntax, such as defining an object's name, description, and relationships with other story elements.
+
+Variables: Variables are used to store and manipulate data in your DSL. Variables can be used to store the state of the story, such as the reader's choices and the current location in the narrative. The user can create and manipulate variables using simple syntax, such as assigning a value to a variable or retrieving its current value.
+
+Collections: Collections are used to group related data together in your DSL. Collections can be used to represent lists of objects, such as a list of characters in the story or a list of possible story paths based on the reader's choices. The user can create and manipulate collections using simple syntax, such as adding or removing objects from a collection or iterating over its contents.
+
+To create and manipulate data in our DSL, the user would typically use a combination of declarative and imperative syntax. The declarative syntax is used to define the structure and content of the story, including the objects, variables, and collections that will be used to represent and manipulate data. The imperative syntax is used to control the flow of the narrative and to manipulate data based on the reader's choices and actions.
+
+For example, the user might define a collection of possible story paths based on the reader's choices, and then use imperative syntax to evaluate the reader's current choice and determine which path to follow. The user might also define a variable to represent the reader's current location in the story, and then use imperative syntax to update the variable as the story progresses.
+
+\textbf {What are the basic control structures in your DSL? How does the user specify or manipulate control flow?}
+
+In our DSL for interactive storytelling, the basic control structures are likely to include branching and looping structures. These control structures are used to control the flow of the narrative based on the reader's choices and actions.
+
+Branching Structures: Branching structures are used to control the flow of the narrative based on conditional logic. In our DSL, the user can use branching structures to evaluate the reader's choices and actions, and then determine which story path to follow. This can be done using simple syntax, such as an "if" statement that checks the value of a variable and then executes different actions based on the result. For example, the user might use an "if" statement to evaluate the reader's choice and then branch to different story paths depending on which option was chosen.
+
+Looping Structures: Looping structures are used to repeat a set of actions multiple times. In our DSL, the user can use looping structures to create repeating elements in the story, such as a character performing a series of actions or the reader revisiting a location multiple times. This can be done using simple syntax, such as a "while" or "for" loop that executes a set of actions repeatedly until a condition is met. For example, the user might use a "while" loop to repeat a set of actions until a certain event occurs, such as the reader finding a key or completing a puzzle.
+
+The user can specify and manipulate control flow in our DSL using a combination of declarative and imperative syntax. The declarative syntax is used to define the structure and content of the story, including the branching and looping structures that will be used to control the flow of the narrative. The imperative syntax is used to evaluate the reader's choices and actions, as well as to manipulate data and control flow based on these choices and actions.
+
+For example, the user might define a branching structure to evaluate the reader's choice and determine which story path to follow. The user might also use imperative syntax to manipulate data and control flow based on the reader's choices, such as updating a variable to represent the reader's current location in the story or branching to a different story path based on the outcome of a puzzle or encounter. Overall, the basic control structures in your DSL would allow the user to create engaging and interactive narratives that can adapt to the reader's choices and actions.
+
+\textbf {What kind(s) of input does a program in your DSL require? What kind(s) of output does a program produce?}
+
+A program or DSL for interactive storytelling would typically require input from the reader in the form of choices, interactions, and other types of user input. This input would be used to control the flow of the narrative and to manipulate data, such as updating the state of the story based on the reader's choices.
+Some specific types of input that a program in our DSL might require include:
+
+\begin{itemize}
+                \item Reader choices: The reader might be presented with a set of options, such as dialogue choices or actions to take, and then select one of these options to continue the story.
+                \item Interactions: The reader might interact with elements of the story, such as clicking on an object or navigating to a new location, and then trigger a new set of actions or dialogue.
+                \item Puzzle or game elements: The reader might need to solve puzzles or complete challenges in order to progress through the story, requiring specific input such as text inputs or clicking on certain elements.
+ \end{itemize}
+A program in our DSL would produce output in the form of the narrative text and visual elements that are displayed to the reader, as well as updates to the state of the story based on the reader's choices and actions. The specific types of output that a program in our DSL produces might include:
+
+\begin{itemize}
+                \item Narrative text: This is the core output of the program, consisting of the text that describes the story, characters, and events.
+                \item Visual elements: The program might also produce visual elements to enhance the story, such as images, videos, or animations.
+                \item Sound or music: The program might incorporate sound or music to enhance the mood or atmosphere of the story.
+                \item Updates to the state of the story: As the reader progresses through the story and makes choices or takes actions, the program would produce updates to the state of the story, such as changing the current location or updating the inventory of the reader's character.
+ \end{itemize}
+
+\textbf {Error handling: How might programs go wrong, and how might  language communicate those errors to the user?}
+
+In a DSL for interactive storytelling, there are several ways that programs might go wrong. Here are some examples:
+\begin{itemize}
+                \item Data errors: when the program manipulates data in unexpected ways, such as by accessing data that has not been initialized or by trying to perform an operation on incompatible data types.
+                \item Logic errors: Logic errors occur when the program's code does not correctly reflect the intended logic of the story. For example, a branching structure might not accurately evaluate the reader's choices or a loop might not correctly repeat the desired actions.
+ \end{itemize}
+When programs encounter errors, it is important to communicate these errors to the user in a clear and understandable way. Here are some ways that a DSL might communicate errors to the user:
+\begin{itemize}
+                \item Error messages: The program might display an error message to the user, explaining what went wrong and how to fix it. This could include specific details about the error, such as which line of code caused the error or which input was invalid.
+                \item Debugging tools: The DSL might provide debugging tools to help the user identify and fix errors. This could include features like step-through debugging, where the user can step through the code line-by-line and inspect the values of variables and data structures.
+ \end{itemize}
+ 
+\textbf {Are there any other DSLs for this domain? If so, what are they, and how will your language compare to these other languages?} 
+
+Yes, there are other DSLs for interactive storytelling. Here are a few examples:
+ \begin{enumerate}
+                 \item Twine: Twine is a popular open-source tool for creating interactive stories. It uses a visual interface to allow authors to create branching stories and add multimedia elements. Twine supports a variety of export formats, including HTML, CSS, and JavaScript.
+                 \item ChoiceScript: ChoiceScript is a DSL developed by Choice of Games, a company that specializes in creating interactive fiction. It uses a text-based scripting language to allow authors to create branching stories with variables and conditionals. The company also provides a publishing platform for authors to distribute their games.
+                 \item Ren'Py: Ren'Py is a DSL specifically designed for creating visual novels, a sub-genre of interactive fiction. It uses a Python-based scripting language to allow authors to create branching stories with custom UI elements, sound, and music. Ren'Py also provides a publishing platform for authors to distribute their games.
+                 \item Inky:Compared to these other DSLs, Inky focuses on providing a simple and intuitive way for authors to create branching stories using a plain text format. It is designed to be easy to learn and use, with a minimal syntax and support for inline comments and documentation. Inky also provides support for exporting stories to a variety of platforms, including HTML, JSON, and InkJS, which allows the stories to be integrated into websites or other applications.
+ \end{enumerate}
+
+\textbf {Here is an overview of our implementation plan:}
+
+\textbf {Define the scope and goals of our language:} Start by defining the scope and goals of your language. Determine what specific features and functionality you want to include and what kind of user experience you want to provide. This will help you prioritize your implementation efforts and focus on the most important aspects of your language. 
+
+\textbf {Choosing a host language:} Decide on a programming language or platform to use as the host for your DSL. The host language should be well-suited to the task of sound processing and have the necessary tools and libraries to support your language. 
+
+\textbf {Choosing a parser and interpreter strategy:} Decide on a strategy for parsing and interpreting the code written in your language. You might choose to use an existing parser or build your own, depending on your specific needs and resources. 
+
+\textbf {Designing the syntax and grammar of your language:} Design the syntax and grammar of your language to be clear, consistent, and easy to understand. Use established conventions and patterns to make your language more accessible to users. 
+
+\textbf {Implementing the core features of your language:} Start implementing the core features of your language, such as the ability to load and process audio files, generate and manipulate sound waves, and apply various effects and filters.
+
+\textbf {Testing and debugging your language:} Test and debug your language as you implement new features. Make sure to identify and address any bugs or performance issues as they arise. 
+Documenting our language: Document your language to make it easier for users to understand and use. Provide clear instructions and examples to help users get started with your language and troubleshoot common issues. 
+
+\textbf {Refining and improving your language:} Continuously refine and improve your language based on feedback from users and your own experience working with it. Add new features and functionality as needed to make your language more useful and powerful.
+
+\section{Teamwork plan}
+When implementing a programming language for interactive storytelling, the tasks can be divided among the team members based on their skills, expertise, and interests.
+ \begin{enumerate}
+                 \item Design and planning: One team member can lead the design and planning process, which involves defining the language features, syntax, and semantics. 
+                 \item Programming language implementation: Another team member can lead the implementation of the programming language. This person should be experienced in programming language implementation, particularly in lexing, parsing, and code generation.
+                 \item Editor implementation: A team member can focus on building an editor for the programming language.
+                 \item Interactive Storytelling content: A team member can focus on creating the interactive storytelling content, which involves writing the scripts and storylines that use the programming language. This person should be skilled in creative writing and have a good understanding of interactive storytelling.
+                 \itemTesting and debugging: One team member can focus on testing and debugging the programming language implementation and editor. 
+ \end{enumerate}
+It is important to ensure that each team member's tasks are well-defined and aligned with the project's goals. Furthermore, we are determined that each team member will work on every aspect of the project, including research, design, implementation and documentation. 
+
+
