@@ -1,17 +1,4 @@
-a=414
-b="string ce faci"
-o="aici"
 start{
-
-A interesting story
-what will he do
-((! die (oh)
-! not die (other)))
-
-}
-other{
-    you won
-}
-oh{
-    oh thats bad ((a))
+    other text
+    (! So are you gonna break up to me after all I done to you. I wanted to bring you the moon)
 }

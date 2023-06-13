@@ -2,9 +2,11 @@ from ExprParser import ExprParser
 from errors import *
 
 class Interpreter:
-    def __init__(self, tree) -> None:
+    def __init__(self, tree, npc) -> None:
         self.tree = tree
         self.vars = {}
+        self.visited = {}
+        self.npc = npc
     
     def getVars(self):
         index = 0
@@ -70,6 +72,10 @@ class Interpreter:
         return None
 
     def checkKnot(self, knot):
+        knot_name = knot.getChild(0).getText()
+        if knot_name in self.visited.keys():
+            return
+
         index_child = 0
         knot_content = knot.getChild(index_child)
         text = ""
@@ -81,15 +87,22 @@ class Interpreter:
                 if isinstance(content, ExprParser.TextContext):
                     text = self.textContext(content, text)
                 if isinstance(content, ExprParser.NpcContext):
-                    text = self.npcContext(content, text)
+                    npc_text = self.npcContext(content, "")
+
+                    text += self.npc.changeText(npc_text)
                 if isinstance(content, ExprParser.Var_opContext):
                     self.expressionContext(content)
                 if isinstance(content, ExprParser.GotoContext):
-                    knot_name = content.getChild(1).getText()
+                    self.visited[knot_name] = True
+                    goknot_name = content.getChild(1).getText()
                     print(text)
                     text = ""
-                    knot_node = self.getKnotByName(knot_name)
-                    self.checkKnot(knot_node)
+                    goknot_node = self.getKnotByName(goknot_name)
+                    self.checkKnot(goknot_node)
+                    """when will recurse again it will exit the loop"""
+                    if knot_name in self.visited.keys():
+                        break
+
                 if isinstance(content, ExprParser.ChoiceContext):
                     print(text)
                     text = ""
@@ -98,8 +111,12 @@ class Interpreter:
                         print(pair[1])
                     choice = int(input("$"))
                     knot_node = self.getKnotByName(pairs[choice][0])
+                    self.visited[knot_name] = True
                     self.checkKnot(knot_node)
 
+                    """when will recurse again it will exit the loop"""
+                    if knot_name in self.visited.keys():
+                        break
 
             index_child += 1
             knot_content = knot.getChild(index_child)
@@ -155,13 +172,7 @@ class Interpreter:
         i = 2
         cont = content.getChild(i)
         while isinstance(cont, ExprParser.TextContext):
-            if cont.getText() == '.newLine':
-                text += "\n"
-            else:
-                if text[-1] != '\n':
-                    text += ' ' + cont.getText()
-                else:
-                    text += cont.getText()
+            text = self.textContext(cont, text)
             i += 1
             cont = content.getChild(i)
         return text

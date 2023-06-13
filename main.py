@@ -4,6 +4,7 @@ from ExprLexer import ExprLexer
 from ExprParser import ExprParser
 from Interpreter import Interpreter
 from errors import MyErrorParserListener, MyErrorLexerListener
+from npc import Npc
 
 def format_code(file_name):
     f = open(file_name, 'r')
@@ -44,9 +45,11 @@ def main(argv):
     parser.addErrorListener(MyErrorParserListener())
     tree = parser.program()
 
-    tj = Interpreter(tree)
+    npc = Npc()
+
+    tj = Interpreter(tree, npc)
     
-    #print(tree.toStringTree())
+    # print(tree.toStringTree())
     #print(tree.toStringTree(recog=parser))
     #print()
 
